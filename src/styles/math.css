@@ -1,0 +1,8 @@
+/* Math typography and responsive display equations */
+.katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .4rem 0; }
+.katex { font-size: 1.06em; }
+.markdown-content { line-height: 1.8; }
+.markdown-content p { margin: .7rem 0; }
+.markdown-content .katex-display { margin: 1rem 0; }
+.research-card .markdown-content p { margin: .55rem 0; }
+.highlight-content .markdown-content p { margin: .55rem 0; }
