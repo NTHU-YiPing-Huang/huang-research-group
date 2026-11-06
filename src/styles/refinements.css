@@ -1,0 +1,87 @@
+/* V1.2 — academic typography, accessible contrast, comfortable spacing. */
+:root {
+  --font-ui: 'Inter', 'Noto Sans TC', system-ui, sans-serif;
+  --font-display: 'Source Serif 4', 'Noto Serif TC', Georgia, serif;
+  --ink: #202b39;
+  --muted: #526276;
+  --accent: #087f78;
+  --canvas: #fafbf9;
+  --soft: #f2f6f5;
+  --line: #dce5e5;
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: var(--canvas);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+body { background: var(--canvas); }
+a:focus-visible, button:focus-visible { outline: 3px solid #13a69a; outline-offset: 4px; }
+.container { width: min(1160px, calc(100% - 56px)); }
+.site-header { height: 80px; background: rgba(255,255,255,.97); border-bottom-color: var(--line); }
+.brand-mark { font: 700 21px var(--font-ui); border-radius: 8px; }
+.brand-label strong { font: 700 13px var(--font-ui); letter-spacing: .085em; }
+.brand-label small { font-size: 10px; letter-spacing: .075em; }
+.desktop-nav { gap: clamp(11px, 1.4vw, 21px); }
+.desktop-nav a { font-size: 13px; font-weight: 500; color: #46586b; }
+.desktop-nav a:hover, .desktop-nav a.active, .lang-toggle a.selected { color: var(--accent); }
+.lang-toggle { font-size: 13px; }
+.hero, .inner-hero { background: #142337; }
+.hero-grid { min-height: 550px; grid-template-columns: 1.25fr .75fr; }
+.hero-copy { padding: 90px 0; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(42px, 4.25vw, 62px); font-weight: 600; line-height: 1.16; letter-spacing: -.035em; max-width: 780px; margin: 25px 0 24px; }
+.lead { font-size: 17px; line-height: 1.8; color: #d0dbe5; max-width: 620px; }
+.eyebrow, .section-kicker { font-size: 12px; letter-spacing: .13em; }
+.btn { font-size: 14px; font-weight: 600; padding: 13px 20px; border-radius: 6px; }
+.btn-primary { background: #9be4d9; color: #123238; }
+.btn-outline { border-color: #8ca1b5; }
+.section { padding: 82px 0; }
+.about, .highlights-section { background: var(--soft); }
+.about-grid { gap: 70px; }
+.about h2, .section h2, .contact-band h2, .inner-hero h1 { font-family: var(--font-display); font-weight: 600; letter-spacing: -.025em; line-height: 1.22; }
+.about h2, .section h2, .contact-band h2 { font-size: clamp(31px, 3vw, 41px); }
+.about p { font-size: 17px; line-height: 1.85; color: var(--muted); }
+.section-head { margin-bottom: 30px; }
+.section-head p, .research-card p, .highlight-content p, .placeholder-panel p { color: var(--muted); }
+.text-link, .tag, .news-item time { color: var(--accent); }
+.text-link { font-size: 14px; }
+.research-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+.research-card { min-height: 235px; padding: 29px 32px; border-color: var(--line); border-radius: 10px; }
+.research-card h3, .research-card h2 { font-family: var(--font-ui); font-size: 20px; font-weight: 650; line-height: 1.4; letter-spacing: -.02em; margin: 15px 0 10px; }
+.research-card p { font-size: 15px; line-height: 1.75; max-width: 44ch; }
+.research-icon { font-size: 29px; color: var(--accent); }
+.card-arrow, .highlight-arrow { color: var(--accent); }
+.highlight-item { grid-template-columns: 215px 1fr 25px; gap: 30px; padding: 18px; border-color: var(--line); border-radius: 10px; }
+.highlight-visual { height: 146px; }
+.highlight-content h3 { font-family: var(--font-ui); font-size: 20px; font-weight: 650; line-height: 1.35; letter-spacing: -.015em; }
+.highlight-content p { font-size: 15px; line-height: 1.75; }
+.news-section { padding-bottom: 95px; }
+.empty-news { color: var(--muted); }
+.contact-band { background: #1b3446; }
+.contact-band p { color: #d0dce6; }
+.site-footer { background: #142337; color: #bdcbd7; font-size: 13px; }
+.inner-hero { padding: 80px 0 75px; }
+.inner-hero h1 { font-size: clamp(42px, 4.5vw, 62px); }
+.inner-hero p { color: #d0dbe5; font-size: 17px; }
+.placeholder-panel { background: #fff; border-color: var(--line); }
+/* For Chinese pages, use a readable sans-serif display face instead of a serif fallback. */
+html[lang='zh-Hant'] .hero h1, html[lang='zh-Hant'] .about h2,
+html[lang='zh-Hant'] .section h2, html[lang='zh-Hant'] .contact-band h2,
+html[lang='zh-Hant'] .inner-hero h1 { font-family: 'Noto Sans TC', sans-serif; font-weight: 600; letter-spacing: -.02em; }
+@media (max-width: 1100px) { .desktop-nav a { font-size: 12px; } }
+@media (max-width: 850px) { .hero-grid { grid-template-columns: 1fr; } .hero-copy { padding: 70px 0 10px; } .hero-art { height: 255px; } .about-grid { gap: 20px; } }
+@media (max-width: 600px) {
+  .container { width: calc(100% - 36px); }
+  .site-header { height: 72px; }
+  .hero h1 { font-size: clamp(36px, 9vw, 44px); line-height: 1.18; letter-spacing: -.025em; }
+  .lead, .about p { font-size: 16px; }
+  .section { padding: 62px 0; }
+  .research-grid { grid-template-columns: 1fr; }
+  .research-card { min-height: 210px; padding: 25px; }
+  .highlight-item { grid-template-columns: 1fr; gap: 15px; }
+  .highlight-visual { height: 165px; }
+  .highlight-content { padding: 4px 4px 10px; }
+  .contact-band { padding: 60px 0; }
+  .mobile-nav { top: 72px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
