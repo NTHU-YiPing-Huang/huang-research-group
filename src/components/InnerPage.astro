@@ -14,8 +14,21 @@ const { lang } = Astro.props;
 const page = Number(Astro.props.page);
 const t = content[lang];
 
+const allEntries = await getCollection('research');
+
+console.log('RESEARCH DEBUG:', {
+  requestedLanguage: lang,
+  page,
+  totalEntries: allEntries.length,
+  entries: allEntries.map((entry) => ({
+    id: entry.id,
+    lang: entry.data.lang,
+    title: entry.data.title,
+  })),
+});
+
 const entries = page === 1
-  ? (await getCollection('research'))
+  ? allEntries
       .filter((entry) => entry.data.lang === lang)
       .sort((a, b) => a.data.order - b.data.order)
   : [];
