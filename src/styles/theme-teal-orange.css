@@ -1,0 +1,152 @@
+
+/* =========================================
+   Yi-Ping Huang Research Group
+   Theme: Teal & Burnt Orange
+   ========================================= */
+
+:root {
+  /* Core palette */
+  --theme-bg: #F7F9F6;
+  --theme-surface: #FFFFFF;
+  --theme-ink: #24413D;
+  --theme-muted: #697B75;
+  --theme-teal: #008080;
+  --theme-orange: #C4673B;
+  --theme-orange-hover: #A94F2B;
+  --theme-border: #DFE8E1;
+
+  /* Optional aliases for future components */
+  --color-background: var(--theme-bg);
+  --color-surface: var(--theme-surface);
+  --color-text: var(--theme-ink);
+  --color-muted: var(--theme-muted);
+  --color-primary: var(--theme-teal);
+  --color-accent: var(--theme-orange);
+  --color-border: var(--theme-border);
+}
+
+/* Base */
+html {
+  background: var(--theme-bg);
+}
+
+body {
+  background: var(--theme-bg);
+  color: var(--theme-ink);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--theme-ink);
+}
+
+/* Links */
+a {
+  color: var(--theme-orange);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--theme-orange-hover);
+}
+
+/* Keep navigation readable */
+header a,
+nav a {
+  color: var(--theme-ink);
+}
+
+header a:hover,
+nav a:hover {
+  color: var(--theme-orange);
+}
+
+/* Section headings */
+.section-kicker {
+  color: var(--theme-orange);
+}
+
+/* Inner page hero */
+.inner-hero {
+  background: var(--theme-bg);
+}
+
+.inner-hero h1 {
+  color: var(--theme-ink);
+}
+
+/* Research cards */
+.research-card {
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  border-radius: 16px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.research-card:hover {
+  border-color: var(--theme-orange);
+  box-shadow: 0 10px 28px rgba(36, 65, 61, 0.08);
+  transform: translateY(-2px);
+}
+
+.research-card h2 {
+  color: var(--theme-ink);
+}
+
+.research-icon {
+  color: var(--theme-orange);
+}
+
+/* Markdown content */
+.markdown-content {
+  color: var(--theme-ink);
+}
+
+.markdown-content a {
+  color: var(--theme-orange);
+}
+
+.markdown-content blockquote {
+  border-left: 3px solid var(--theme-orange);
+  padding-left: 1rem;
+}
+
+/* News */
+.news-item {
+  border-color: var(--theme-border);
+}
+
+.news-item time {
+  color: var(--theme-muted);
+}
+
+/* Placeholder panels */
+.placeholder-panel {
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+}
+
+.placeholder-symbol {
+  color: var(--theme-orange);
+}
+
+/* Accessible focus indication */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--theme-orange);
+  outline-offset: 3px;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .research-card {
+    transition: none;
+  }
+
+  .research-card:hover {
+    transform: none;
+  }
+}
