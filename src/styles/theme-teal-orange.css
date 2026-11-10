@@ -1,32 +1,267 @@
 
 /* ==========================================================
-   SPLIT TONE HERO BANNER
-   Left: Deep Teal
-   Right: Warm Ivory
+   YI-PING HUANG RESEARCH GROUP
+   TEAL & BURNT ORANGE THEME
+
+   Version: 2.0
+   Design: Split Tone Hero Banner
+
+   Left Banner  : Deep Teal
+   Right Banner : Warm Ivory
+   Accent       : Burnt Orange
+
+   This stylesheet should load AFTER:
+   1. global.css
+   2. refinements.css
+
+   Contents:
+   01. Theme Variables
+   02. Global Colors
+   03. Header and Navigation
+   04. Split Tone Hero Banner
+   05. Hero Typography and Buttons
+   06. Hero SVG Logo
+   07. General Sections
+   08. About Section
+   09. Research Cards
+   10. Research Highlights
+   11. News
+   12. Contact and Footer
+   13. Inner Pages
+   14. Markdown Content
+   15. Accessibility
+   16. Tablet and Mobile
    ========================================================== */
 
-.hero.hero-split {
-  background: #173A38;
+
+/* ==========================================================
+   01. THEME VARIABLES
+   ========================================================== */
+
+:root {
+
+  /* Backgrounds */
+  --theme-bg: #F7F9F6;
+  --theme-surface: #FFFFFF;
+  --theme-surface-soft: #F0F5F1;
+
+  /* Text */
+  --theme-ink: #24413D;
+  --theme-muted: #60756F;
+
+  /* Teal */
+  --theme-teal: #176E69;
+  --theme-teal-dark: #173A38;
+  --theme-teal-deep: #102B29;
+
+  /* Burnt Orange */
+  --theme-orange: #C4673B;
+  --theme-orange-hover: #A94F2B;
+  --theme-orange-light: #E8B18D;
+
+  /* Borders */
+  --theme-border: #DFE8E1;
+
+  /* Hero */
+  --theme-hero-bg: #173A38;
+  --theme-hero-right: #F0F5F1;
+  --theme-hero-text: #FFFFFF;
+  --theme-hero-muted: #C0D3CF;
+
+  /* Shadows */
+  --theme-shadow:
+    0 16px 38px rgba(23, 58, 56, 0.09);
+
+  /* Optional generic aliases */
+  --color-background: var(--theme-bg);
+  --color-surface: var(--theme-surface);
+  --color-text: var(--theme-ink);
+  --color-muted: var(--theme-muted);
+  --color-primary: var(--theme-teal);
+  --color-accent: var(--theme-orange);
+  --color-border: var(--theme-border);
+
+}
+
+
+/* ==========================================================
+   02. GLOBAL COLORS
+   ========================================================== */
+
+html {
+  background: var(--theme-bg);
+  color: var(--theme-ink);
+}
+
+body {
+  background: var(--theme-bg);
+  color: var(--theme-ink);
+}
+
+/* Headings outside dark sections */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--theme-ink);
+}
+
+/* Links inherit their surrounding text by default */
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  transition: color 0.2s ease;
+}
+
+
+/* ==========================================================
+   03. HEADER AND NAVIGATION
+   ========================================================== */
+
+.site-header {
+  background: var(--theme-surface);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+/* Brand */
+
+.brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  background: var(--theme-teal-dark);
   color: #FFFFFF;
+}
+
+.brand-dot {
+  color: var(--theme-orange-light);
+}
+
+.brand-label strong {
+  color: var(--theme-ink);
+}
+
+.brand-label small {
+  color: var(--theme-muted);
+}
+
+/* Desktop navigation */
+
+.desktop-nav a {
+  color: var(--theme-muted);
+}
+
+.desktop-nav a:hover,
+.desktop-nav a.active {
+  color: var(--theme-orange);
+}
+
+/* Language switcher */
+
+.lang-toggle {
+  border-left-color: var(--theme-border);
+}
+
+.lang-toggle a {
+  color: var(--theme-muted);
+}
+
+.lang-toggle a.selected {
+  color: var(--theme-orange);
+}
+
+.lang-toggle span {
+  color: var(--theme-border);
+}
+
+/* Mobile menu */
+
+.menu-toggle {
+  color: var(--theme-ink);
+}
+
+.mobile-nav {
+  background: var(--theme-surface);
+  box-shadow:
+    0 14px 24px rgba(23, 58, 56, 0.12);
+}
+
+.mobile-nav a {
+  color: var(--theme-ink);
+  border-bottom-color: var(--theme-border);
+}
+
+.mobile-nav a:hover {
+  color: var(--theme-orange);
+}
+
+
+/* ==========================================================
+   04. SPLIT TONE HERO BANNER
+   ========================================================== */
+
+/*
+   Desktop layout:
+
+   +-----------------------+-------------------+
+   |                       |                   |
+   |  Deep Teal            |  Warm Ivory       |
+   |                       |                   |
+   |  Heading              |  SVG Logo         |
+   |  Introduction         |                   |
+   |  Buttons              |                   |
+   |                       |                   |
+   +-----------------------+-------------------+
+
+   Mobile layout:
+
+   +-------------------------------------------+
+   |            Deep Teal Text                 |
+   +-------------------------------------------+
+   |            Warm Ivory Logo                |
+   +-------------------------------------------+
+*/
+
+/* Main hero */
+
+.hero.hero-split {
+  background: var(--theme-hero-bg);
+  color: var(--theme-hero-text);
+  position: relative;
   overflow: hidden;
 }
 
-/* Desktop: 55% text / 45% logo */
+/* Two-column layout */
 
 .hero-split-layout {
   display: grid;
-  grid-template-columns: 55% 45%;
+  grid-template-columns: minmax(0, 55%) minmax(0, 45%);
   min-height: 580px;
 }
 
-/* Left panel */
+/* Left text panel */
 
 .hero-split-left {
-  background: #173A38;
+  background: var(--theme-teal-dark);
+
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 70px clamp(28px, 5vw, 90px);
+
+  min-width: 0;
+
+  padding:
+    70px
+    clamp(28px, 5vw, 90px);
 }
 
 .hero-split-left .hero-copy {
@@ -35,65 +270,168 @@
   padding: 0;
 }
 
+/* Right logo panel */
+
+.hero-split-right {
+  background: var(--theme-hero-right);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+
+  padding:
+    55px
+    clamp(24px, 4vw, 70px);
+}
+
+
+/* ==========================================================
+   05. HERO TYPOGRAPHY AND BUTTONS
+   ========================================================== */
+
+/* Eyebrow */
+
 .hero-split .eyebrow {
-  color: #E8B18D;
+  color: var(--theme-orange-light);
+  display: flex;
+  align-items: center;
+  gap: 11px;
 }
 
 .hero-split .pulse {
-  background: #C4673B;
-  box-shadow: 0 0 0 5px rgba(196, 103, 59, 0.18);
+  width: 7px;
+  height: 7px;
+
+  background: var(--theme-orange);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 5px rgba(196, 103, 59, 0.18);
 }
+
+/* Hero heading */
 
 .hero-split h1 {
-  color: #FFFFFF;
+  color: var(--theme-hero-text);
+
+  font-family:
+    'Manrope',
+    'Inter',
+    'Noto Sans TC',
+    system-ui,
+    sans-serif;
+
   font-size: clamp(40px, 4vw, 64px);
+  font-weight: 800;
   line-height: 1.13;
+
   letter-spacing: -2px;
+
+  max-width: 730px;
+  margin: 30px 0 26px;
+
+  overflow-wrap: break-word;
 }
+
+/* Hero description */
 
 .hero-split .lead {
-  color: #C0D3CF;
-  max-width: 590px;
+  color: var(--theme-hero-muted);
+
+  font-size: 17px;
   line-height: 1.85;
+
+  max-width: 590px;
 }
 
-/* Buttons */
+/* Action buttons */
+
+.hero-split .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.hero-split .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+  padding: 16px 22px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  border-radius: 7px;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Primary button */
 
 .hero-split .btn-primary {
-  background: #C4673B;
+  background: var(--theme-orange);
   color: #FFFFFF;
 }
 
 .hero-split .btn-primary:hover {
-  background: #A94F2B;
+  background: var(--theme-orange-hover);
+  color: #FFFFFF;
 }
 
+/* Secondary button */
+
 .hero-split .btn-outline {
-  border: 1px solid rgba(230, 242, 237, 0.55);
+  background: transparent;
+
   color: #FFFFFF;
+
+  border:
+    1px solid
+    rgba(230, 242, 237, 0.55);
 }
 
 .hero-split .btn-outline:hover {
-  border-color: #E8B18D;
   color: #FFFFFF;
+  border-color: var(--theme-orange-light);
 }
 
-/* Right panel */
+/* Button hover movement */
 
-.hero-split-right {
-  background: #F0F5F1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 55px clamp(24px, 4vw, 70px);
-  min-width: 0;
+.hero-split .btn:hover {
+  transform: translateY(-2px);
 }
 
-/* Logo presentation */
+
+/* ==========================================================
+   06. HERO SVG LOGO
+   ========================================================== */
+
+/*
+   Expected image path:
+
+   public/images/logo-wide.svg
+
+   Astro source:
+
+   src={`${base}/images/logo-wide.svg`}
+
+   Preserve the original SVG aspect ratio.
+*/
 
 .hero-logo-container {
   width: 100%;
   max-width: 600px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,51 +439,540 @@
 
 .hero-logo {
   display: block;
+
   width: 100%;
   height: auto;
+
   max-height: 360px;
+
   object-fit: contain;
 }
 
+/*
+   Do not apply filters to the SVG initially.
+   Its original colors should remain visible
+   against the warm ivory background.
+*/
+
+
 /* ==========================================================
-   TABLET
+   07. GENERAL SECTIONS
    ========================================================== */
+
+.section {
+  background: var(--theme-bg);
+}
+
+.section-kicker {
+  color: var(--theme-orange);
+}
+
+/* Section headings */
+
+.section h2 {
+  color: var(--theme-ink);
+}
+
+.section-head h2 {
+  color: var(--theme-ink);
+}
+
+.section-head p {
+  color: var(--theme-muted);
+}
+
+/* Text links */
+
+.text-link {
+  color: var(--theme-orange-hover);
+}
+
+.text-link:hover {
+  color: var(--theme-teal);
+}
+
+
+/* ==========================================================
+   08. ABOUT SECTION
+   ========================================================== */
+
+.about,
+.section.about {
+  background: var(--theme-surface-soft);
+}
+
+.about h2 {
+  color: var(--theme-ink);
+}
+
+.about p {
+  color: var(--theme-muted);
+}
+
+
+/* ==========================================================
+   09. RESEARCH CARDS
+   ========================================================== */
+
+.research-card {
+  background: var(--theme-surface);
+
+  border:
+    1px solid var(--theme-border);
+
+  border-radius: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Hover */
+
+.research-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(196, 103, 59, 0.65);
+
+  box-shadow: var(--theme-shadow);
+}
+
+/* Icons */
+
+.research-icon {
+  color: var(--theme-orange);
+}
+
+/* Index */
+
+.card-index {
+  color: var(--theme-muted);
+}
+
+/* Headings */
+
+.research-card h2,
+.research-card h3 {
+  color: var(--theme-ink);
+}
+
+/* Descriptions */
+
+.research-card p {
+  color: var(--theme-muted);
+}
+
+/* Arrow */
+
+.card-arrow {
+  color: var(--theme-orange);
+}
+
+
+/* ==========================================================
+   10. RESEARCH HIGHLIGHTS
+   ========================================================== */
+
+.highlights-section,
+.section.highlights-section {
+  background: var(--theme-surface-soft);
+}
+
+/* Highlight card */
+
+.highlight-item {
+  background: var(--theme-surface);
+  border-color: var(--theme-border);
+}
+
+/* Highlight artwork */
+
+.highlight-visual {
+  background:
+    radial-gradient(
+      circle at 60% 45%,
+      #3B8C80,
+      #173A38 50%,
+      #102C2A
+    );
+}
+
+/* Visual number */
+
+.visual-number {
+  color: var(--theme-orange-light);
+}
+
+/* Decorative rings */
+
+.visual-rings i {
+  border-color:
+    rgba(232, 177, 141, 0.75);
+}
+
+/* Tags */
+
+.tag {
+  color: var(--theme-orange);
+}
+
+/* Highlight text */
+
+.highlight-content h3 {
+  color: var(--theme-ink);
+}
+
+.highlight-content p {
+  color: var(--theme-muted);
+}
+
+/* Highlight arrow */
+
+.highlight-arrow {
+  color: var(--theme-orange);
+}
+
+
+/* ==========================================================
+   11. NEWS
+   ========================================================== */
+
+.news-section,
+.section.news-section {
+  background: var(--theme-bg);
+}
+
+/* News items */
+
+.news-item {
+  border-bottom-color: var(--theme-border);
+}
+
+.news-item time {
+  color: var(--theme-orange-hover);
+}
+
+.news-item span {
+  color: var(--theme-ink);
+}
+
+/* Empty news placeholder */
+
+.empty-news {
+  color: var(--theme-muted);
+  border-color: var(--theme-border);
+}
+
+
+/* ==========================================================
+   12. CONTACT AND FOOTER
+   ========================================================== */
+
+/* Contact band */
+
+.contact-band {
+  background: var(--theme-teal-dark);
+  color: #FFFFFF;
+}
+
+.contact-band h2 {
+  color: #FFFFFF;
+}
+
+.contact-band p {
+  color: var(--theme-hero-muted);
+}
+
+/* Buttons in contact band */
+
+.contact-band .btn-primary {
+  background: var(--theme-orange);
+  color: #FFFFFF;
+}
+
+.contact-band .btn-primary:hover {
+  background: var(--theme-orange-hover);
+}
+
+.contact-band .btn-outline {
+  color: #FFFFFF;
+  border-color:
+    rgba(230, 242, 237, 0.55);
+}
+
+/* Footer */
+
+.site-footer {
+  background: var(--theme-teal-deep);
+  color: #B8CBC6;
+}
+
+.site-footer a:hover {
+  color: var(--theme-orange-light);
+}
+
+
+/* ==========================================================
+   13. INNER PAGES
+   ========================================================== */
+
+/* Inner hero */
+
+.inner-hero {
+  background: var(--theme-teal-dark);
+  color: #FFFFFF;
+}
+
+.inner-hero h1 {
+  color: #FFFFFF;
+}
+
+.inner-hero p {
+  color: var(--theme-hero-muted);
+}
+
+.inner-hero .section-kicker {
+  color: var(--theme-orange-light);
+}
+
+/* Main inner content */
+
+.inner-content {
+  background: var(--theme-bg);
+}
+
+/* Placeholder panel */
+
+.placeholder-panel {
+  background: var(--theme-surface);
+  border-color: var(--theme-border);
+}
+
+.placeholder-panel h2 {
+  color: var(--theme-ink);
+}
+
+.placeholder-panel p {
+  color: var(--theme-muted);
+}
+
+.placeholder-symbol {
+  color: var(--theme-orange);
+}
+
+
+/* ==========================================================
+   14. MARKDOWN CONTENT
+   ========================================================== */
+
+/*
+   These styles apply to elements inside
+   a .markdown-content wrapper.
+*/
+
+.markdown-content {
+  color: var(--theme-ink);
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4 {
+  color: var(--theme-ink);
+}
+
+.markdown-content p,
+.markdown-content li {
+  line-height: 1.8;
+}
+
+.markdown-content a {
+  color: var(--theme-orange-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.markdown-content a:hover {
+  color: var(--theme-teal);
+}
+
+/* Blockquotes */
+
+.markdown-content blockquote {
+  border-left:
+    3px solid var(--theme-orange);
+
+  padding-left: 1rem;
+
+  color: var(--theme-muted);
+}
+
+/* Horizontal rules */
+
+.markdown-content hr {
+  border: 0;
+  border-top:
+    1px solid var(--theme-border);
+}
+
+/* Inline code */
+
+.markdown-content :not(pre) > code {
+  background: var(--theme-surface-soft);
+  color: var(--theme-ink);
+
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+
+/* Code blocks */
+
+.markdown-content pre {
+  background: var(--theme-teal-deep);
+  color: #F0F5F1;
+
+  padding: 1.25rem;
+  border-radius: 10px;
+
+  overflow-x: auto;
+}
+
+/* Tables */
+
+.markdown-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border:
+    1px solid var(--theme-border);
+
+  padding: 10px 14px;
+}
+
+.markdown-content th {
+  background: var(--theme-surface-soft);
+  color: var(--theme-ink);
+}
+
+
+/* ==========================================================
+   15. ACCESSIBILITY
+   ========================================================== */
+
+/* Keyboard focus */
+
+a:focus-visible,
+button:focus-visible {
+  outline:
+    2px solid var(--theme-orange);
+
+  outline-offset: 3px;
+}
+
+/* Stronger focus contrast on dark backgrounds */
+
+.hero a:focus-visible,
+.contact-band a:focus-visible,
+.inner-hero a:focus-visible {
+  outline-color: var(--theme-orange-light);
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .research-card,
+  .btn,
+  .hero-split .btn {
+    transition: none;
+  }
+
+  .research-card:hover,
+  .btn:hover,
+  .hero-split .btn:hover {
+    transform: none;
+  }
+
+}
+
+
+/* ==========================================================
+   16. RESPONSIVE DESIGN
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   16A. SMALL DESKTOP / TABLET
+   Width <= 1100px
+   ---------------------------------------------------------- */
 
 @media (max-width: 1100px) {
 
+  /* Hero layout */
+
   .hero-split-layout {
-    grid-template-columns: 54% 46%;
+    grid-template-columns:
+      minmax(0, 54%)
+      minmax(0, 46%);
+
     min-height: 520px;
   }
+
+  /* Left panel */
 
   .hero-split-left {
     padding: 55px 35px;
   }
 
+  /* Right panel */
+
   .hero-split-right {
     padding: 40px 30px;
   }
+
+  /* Heading */
 
   .hero-split h1 {
     font-size: clamp(36px, 4vw, 52px);
   }
 
+  /* Description */
+
   .hero-split .lead {
     font-size: 15px;
   }
 
+  /* Logo */
+
+  .hero-logo-container {
+    max-width: 460px;
+  }
+
 }
 
-/* ==========================================================
-   MOBILE / SMALL TABLET
-   ========================================================== */
+
+/* ----------------------------------------------------------
+   16B. TABLET / MOBILE
+   Width <= 850px
+   ---------------------------------------------------------- */
 
 @media (max-width: 850px) {
+
+  /*
+     Switch from side-by-side to stacked layout.
+  */
 
   .hero-split-layout {
     grid-template-columns: 1fr;
     min-height: auto;
   }
+
+  /* Text panel */
 
   .hero-split-left {
     justify-content: center;
@@ -156,6 +983,8 @@
     max-width: 680px;
   }
 
+  /* Logo panel */
+
   .hero-split-right {
     padding: 65px 32px;
     min-height: 300px;
@@ -165,29 +994,60 @@
     max-width: 460px;
   }
 
+  .hero-logo {
+    max-height: 300px;
+  }
+
 }
 
-/* ==========================================================
-   SMALL MOBILE
-   ========================================================== */
+
+/* ----------------------------------------------------------
+   16C. SMALL MOBILE
+   Width <= 600px
+   ---------------------------------------------------------- */
 
 @media (max-width: 600px) {
+
+  /* Header */
+
+  .site-header {
+    background: var(--theme-surface);
+  }
+
+  .mobile-nav {
+    background: var(--theme-surface);
+  }
+
+  /* Hero text panel */
 
   .hero-split-left {
     padding: 65px 24px 55px;
   }
 
+  /* Hero heading */
+
   .hero-split h1 {
     font-size: clamp(34px, 8vw, 42px);
     line-height: 1.18;
     letter-spacing: -1.4px;
+
     margin: 24px 0 20px;
   }
+
+  /* Description */
 
   .hero-split .lead {
     font-size: 15px;
     line-height: 1.8;
   }
+
+  /* Eyebrow */
+
+  .hero-split .eyebrow {
+    font-size: 9px;
+  }
+
+  /* Buttons */
 
   .hero-split .hero-actions {
     gap: 12px;
@@ -199,17 +1059,35 @@
     gap: 12px;
   }
 
+  /* Logo panel */
+
   .hero-split-right {
     padding: 48px 25px;
     min-height: 240px;
   }
+
+  /* Logo size */
 
   .hero-logo-container {
     max-width: 340px;
   }
 
   .hero-logo {
+    width: 100%;
+    height: auto;
     max-height: 240px;
+  }
+
+  /* Research cards */
+
+  .research-card {
+    border-radius: 12px;
+  }
+
+  /* Highlights */
+
+  .highlight-item {
+    border-radius: 12px;
   }
 
 }
