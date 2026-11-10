@@ -1,11 +1,114 @@
+
 ---
 import Base from '../layouts/Base.astro';
-import {content,type Lang} from '../data/site';
-import {updates} from '../data/updates';
-import {getCollection,render} from 'astro:content';
-interface Props {lang:Lang;page:number}
-const entries=(await getCollection('research',({data})=>data.lang===Astro.props.lang)).sort((a,b)=>a.data.order-b.data.order);
-const research=await Promise.all(entries.map(async entry=>({entry,Content:(await render(entry)).Content})));
-const {lang,page}=Astro.props;const t=content[lang];
+import { content, type Lang } from '../data/site';
+import { updates } from '../data/updates';
+import { getCollection, render } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+  page: number | string;
+}
+
+const { lang } = Astro.props;
+const page = Number(Astro.props.page);
+const t = content[lang];
+
+const entries = page === 1
+  ? (await getCollection('research'))
+      .filter((entry) => entry.data.lang === lang)
+      .sort((a, b) => a.data.order - b.data.order)
+  : [];
+
+const research = await Promise.all(
+  entries.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  }))
+);
+
+console.log(
+  `[Research] lang=${lang}, page=${page}, entries=${entries.length}`
+);
 ---
-<Base lang={lang} page={page} title={t.nav[page]}><section class="inner-hero"><div class="container"><span class="section-kicker">YI-PING HUANG RESEARCH GROUP / {String(page).padStart(2,'0')}</span><h1>{t.nav[page]}</h1><p>{page===1?t.researchSub:page===4?t.newsSub:t.placeholder}</p></div></section><section class="section inner-content"><div class="container">{page===1?<div class="research-grid">{research.map(item=><article class="research-card" id={item.entry.data.slug}><span class="research-icon">{item.entry.data.icon}</span><h2>{item.entry.data.title}</h2><div class="markdown-content"><item.Content /></div></article>)}</div>:page===4&&updates.length>0?<div class="news-items">{updates.map(item=><div class="news-item"><time>{item.date}</time><span>{item[lang]}</span>{item.url&&<a href={item.url}>↗</a>}</div>)}</div>:<div class="placeholder-panel"><span class="placeholder-symbol">✳</span><h2>{t.placeholder}</h2><p>{page===6?t.contactText:page===7?t.contactText:t.aboutText}</p>{page===5&&<a class="text-link" href="https://nthu-yiping-huang.github.io/CM_I_2026_Fall/" target="_blank" rel="noopener">Condensed Matter Physics I ↗</a>}</div>}</div></section></Base>
+
+<Base lang={lang} page={page} title={t.nav[page]}>
+  <section class="inner-hero">
+    <div class="container">
+      <span class="section-kicker">
+        YI-PING HUANG RESEARCH GROUP / {String(page).padStart(2, '0')}
+      </span>
+      <h1>{t.nav[page]}</h1>
+      <p>
+        {page === 1
+          ? t.researchSub
+          : page === 4
+            ? t.newsSub
+            : t.placeholder}
+      </p>
+    </div>
+  </section>
+
+  <section class="section inner-content">
+    <div class="container">
+      {page === 1 ? (
+        research.length > 0 ? (
+          <div class="research-grid">
+            {research.map((item) => (
+              <article
+                class="research-card"
+                id={item.entry.data.slug}
+              >
+                <span class="research-icon">
+                  {item.entry.data.icon}
+                </span>
+                <h2>{item.entry.data.title}</h2>
+                <div class="markdown-content">
+                  <item.Content />
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div class="placeholder-panel">
+            <h2>Research content unavailable</h2>
+            <p>
+              No research entries were found for language: {lang}.
+              Please check the Markdown collection.
+            </p>
+          </div>
+        )
+      ) : page === 4 && updates.length > 0 ? (
+        <div class="news-items">
+          {updates.map((item) => (
+            <div class="news-item">
+              <time>{item.date}</time>
+              <span>{item[lang]}</span>
+              {item.url && <a href={item.url}>↗</a>}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="placeholder-panel">
+          <span class="placeholder-symbol">✳</span>
+          <h2>{t.placeholder}</h2>
+          <p>
+            {page === 6 || page === 7
+              ? t.contactText
+              : t.aboutText}
+          </p>
+          {page === 5 && (
+            <a
+              class="text-link"
+              href="https://nthu-yiping-huang.github.io/CM_I_2026_Fall/"
+              target="_blank"
+              rel="noopener"
+            >
+              Condensed Matter Physics I ↗
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
